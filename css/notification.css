@@ -1,0 +1,306 @@
+@import "../../css/style.css";
+.content   
+{
+    
+}
+header  
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+header  .title__name 
+{
+    margin-right:10px;
+}
+section 
+{
+    font-size: 1rem;
+}
+.filter__noti
+{
+    display: flex;
+    flex-direction: row;
+    
+}
+.filter__line 
+{
+    height:3px;
+    width:100px;
+    background-color: var(--primary-color);
+    transition: all 0.2s ease-in-out;
+    margin-bottom:10px;
+}
+.filter__noti form 
+{
+    
+    height:30px;
+    margin-right:15px;
+    line-height: 30px;
+    cursor: pointer;
+    
+}
+.filter__noti form button  
+{
+    border:none;
+    background-color: transparent;
+    width:100%;
+    height:100%;
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.section-50 {
+    padding: 50px 0;
+}
+.create__new 
+{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.new__btn
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom:10px;
+    padding:5px;
+    border-radius: 5px;
+    border:1px solid var(--border-color);
+    cursor: pointer;
+}
+.new__btn:hover
+{
+    background-color:var(--primary-color-light);
+}
+.new__btn span 
+{
+    margin-left:5px;
+}
+.m-b-50 {
+    margin-bottom: 50px;
+}
+
+.dark-link {
+    color: #333;
+}
+
+.heading-line {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.heading-line:after {
+    content: "";
+    height: 4px;
+    width: 75px;
+    background-color: #29B6F6;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.notification-ui_dd-content {
+    margin-bottom: 30px;
+}
+.notification-ui_dd-content .notification-filter
+{
+    display: flex;
+    margin-bottom:20px;
+}
+.notification-ui_dd-content .notification-filter .notification-filter_title 
+{
+    margin-right:10px;
+}
+.notification-ui_dd-content .notification-filter select 
+{
+    outline: none;
+    border:1px solid var(--border-color);
+    font-family: var(--font-family);
+}
+.notification-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 7px;
+    background: var(--primary-color-light);
+    cursor: pointer;
+    transition: all 0.5s ease;
+    -moz-user-select: none !important;
+-webkit-touch-callout: none!important;
+-webkit-user-select: none!important;
+-khtml-user-select: none!important;
+-moz-user-select: none!important;
+-ms-user-select: none!important;
+user-select: none!important;
+    /* -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); */
+    /* box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); */
+}
+
+.notification-list--unread {
+    border-left: 2px solid #29B6F6;
+}
+.notification-list .notification-list_content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.notification-list .notification-list_content .notification-list_img img {
+    height: 60px;
+    width: 48px;
+    /* border-radius: 50px; */
+    margin-right: 20px;
+}
+.notification-list .notification-list_content .notification-list_detail .title 
+{
+    display: flex;
+}
+.notification-list .notification-list_content .notification-list_detail .text-muted 
+{
+    font-size: 1rem;
+    width:600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top:10px;
+}
+.notification-list.see-more   .notification-list_detail .text-muted 
+{
+    white-space:wrap;
+    overflow:visible;
+    text-overflow: ellipsis;
+} 
+.notification-list .notification-list_detail .more-infor
+{
+    display: none;
+}
+.notification-list.see-more .notification-list_detail .more-infor
+{
+    display: block;
+}
+.notification-list .notification-list_content .notification-list_detail .title i 
+{
+    margin-right:5px;
+}
+.notification-list .notification-list_content .notification-list_detail p {
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+.notification-list .notification-list_content .notification-list_detail .creation-time
+{
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top:20px;
+
+}
+.notification-list_creation-time
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-end;
+}
+.notification-list_creation-time button 
+{
+    height:30px;
+    width:100px;
+    border-radius: 5px;
+    border:none;
+    cursor: pointer;
+    color:#fff;
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+}
+.notification-list_creation-time button:hover 
+{
+    opacity: 0.9;
+}
+.notification-list_creation-time .execute-status
+{
+    height:50px;
+    margin-top:5px;
+    display: none;
+}
+.notification-list_creation-time .execute-status form:first-child
+{
+    margin-right:10px;
+}
+.notification-list_creation-time .execute-status.show 
+{
+    display: flex;
+}
+.notification-list_creation-time .execute-status button 
+{
+    height:100%;
+    padding:5px;
+}
+.notification-list_creation-time .execute-status .deny 
+{
+    background-color: var(--primary-color-light);
+    border:1px solid var(--border-color);
+    color:#111;
+}
+.notification-list_creation-time .receive-btn
+{
+    display: block;
+    height:50px;
+    margin-top:5px;
+}
+.notification-list_creation-time .receive-btn.hidden 
+{
+    display: none;
+}
+.notification-list .notification-list_feature-img img {
+    height: 48px;
+    width: 48px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+ .overlay-wrapper
+{
+    display: none;
+    width:100%;
+    height:100vh;
+    position: relative;
+    text-align: center;
+}
+.overlay 
+{
+    background-color:#111;
+    opacity: 0.5;
+    
+    width:100%;
+    height:100%;
+
+    text-align: center;
+}
+.overlay-wrapper img 
+{
+    position: absolute;
+    width:70vh;
+    height:100%;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+.text-center
+{
+    position: absolute;
+    bottom:20px;
+    font-size: 0.9rem;
+}
+select[name ='repair-status']
+{
+    height:35px;
+    font-family: var(--font-family);
+    padding:5px;
+    margin-top:5px;
+    outline: none;
+}
