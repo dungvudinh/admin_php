@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 11:56 AM
+-- Generation Time: Jun 10, 2023 at 03:51 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -80,15 +80,18 @@ CREATE TABLE `app_form_server` (
   `title` varchar(200) NOT NULL,
   `content` varchar(1000) NOT NULL,
   `end_time` datetime NOT NULL,
-  `image_url` varchar(500) NOT NULL
+  `image_url` varchar(500) NOT NULL,
+  `create_at` datetime NOT NULL,
+  `start_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `app_form_server`
 --
 
-INSERT INTO `app_form_server` (`id`, `title`, `content`, `end_time`, `image_url`) VALUES
-(1, 'Tuyển Thành Viên  Mùa Thứ 15', 'Sân chơi dành cho các bạn có đam mê về quay phim, media, sửa chữa kĩ thuật phần mềm,  phần cứng', '2023-06-10 23:59:59', '999-Anh-Gai-Xinh-Viet-Nam-Hot-Girl-Cute-De (1).jpg');
+INSERT INTO `app_form_server` (`id`, `title`, `content`, `end_time`, `image_url`, `create_at`, `start_time`) VALUES
+(1, 'Tuyển Thành Viên  Mùa Thứ 15', 'Sân chơi dành cho các bạn có đam mê về quay phim, media, sửa chữa kĩ thuật phần mềm,  phần cứng', '2023-06-10 23:59:59', 'tech_img2.jpg', '2023-06-08 06:00:00', '2023-06-09 20:59:59'),
+(2, 'Chương trình Tech Support ', 'Nhanh chân đến với chúng tớ.Chương trình chỉ diễn ra trong 2 ngày 23 và 29/5   ', '2023-06-12 23:59:59', 'tech_img.jpg\r\n', '2023-06-08 08:00:00', '2023-06-09 09:00:00');
 
 -- --------------------------------------------------------
 
@@ -225,7 +228,7 @@ CREATE TABLE `repair_form` (
 --
 
 INSERT INTO `repair_form` (`id`, `full_name`, `sdt`, `tinh_trang`, `mo_ta`, `create_at`, `unread`, `repair_status`) VALUES
-(1, 'Nguyễn Thị Dung ', '0869370492', 'lap không lên nguồn', 'Mình đang dùng bình thường thì máy bị tắt nguồn. Mình đã cố gắng thử cắm sạc nhưng bất thành', '2023-06-06 07:00:00', 1, 1);
+(1, 'Nguyễn Thị Dung ', '0869370492', 'lap không lên nguồn', 'Mình đang dùng bình thường thì máy bị tắt nguồn. Mình đã cố gắng thử cắm sạc nhưng bất thành', '2023-06-06 07:00:00', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -355,7 +358,7 @@ ALTER TABLE `app_form_client`
 -- AUTO_INCREMENT for table `app_form_server`
 --
 ALTER TABLE `app_form_server`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ban`
 --
