@@ -21,7 +21,21 @@ if(isset($_POST['load-more']))
 }
 if(isset($_POST['repair-status']))
 {
-    echo $_POST['repair-status'];
+    echo $_POST['repair-status'];   
+    echo $_POST['form-repair_id'];
+    $sql = "UPDATE repair_form SET repair_status = ". $_POST['repair-status']." WHERE id  = ".$_POST['form-repair_id']."";
+    echo $sql;
 }
-$connection->query($sql);
+if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $start_time =$_POST['start_time'];
+    $end_time = $_POST['end_time'];
+    $filename = $_FILES['file']['name'];
+    $tempFile = $_FILES['file']['tmp_name'];
+    // $uploadDir = 'uploads/';
+    // $targetFile = $uploadDir . $_FILES['file']['name'];
+   echo  $filename;
+  }
+// $connection->query($sql);
 ?>  

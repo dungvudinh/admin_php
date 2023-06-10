@@ -30,14 +30,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
          date_default_timezone_set("Asia/Ho_Chi_Minh");
          echo date("hisYmd")
          ?> -->
-             <!-- <form method="POST" action="" enctype="multipart/form-data">        
-                 <input type="file" name="choosefile" value="" />
-                 <div>
-                     <button type="submit" name="uploadfile">
-                     UPLOAD
-                     </button>
-                 </div>
-                 </form> -->
+            
            
          <div class ="container">
              <div class ="container__search">
@@ -240,22 +233,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
        mysqli_query($connection, $sql);
     }
 ?>
-<!-- <?php
-$message = "";
-if(isset($_POST['uploadfile']))
-{
-    $filename = $_FILES["choosefile"]["name"];
-    $tempname = $_FILES["choosefile"]["tmp_name"];  
-    $folder = "./avatar_users/".$filename;   
-    $sql = "INSERT INTO image VALUES('".$filename."')";
-    mysqli_query($connection, $sql);    
-    if(move_uploaded_file($tempname, $folder))
-        $message ="Image uploaded successfully";
-    else 
-    $message = "Failed to upload image";
-    echo "<script> alert('".$message."')</script>";
-}
-    ?> -->
+
 <script>
 const categories = document.querySelector('.categories');
 const categoryItems =document.querySelectorAll('.categories li');

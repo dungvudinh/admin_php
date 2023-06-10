@@ -95,24 +95,18 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
 
                             }
                            }
-                          
                         }
                        
                         ?>
                         </div>
-                    <!-- <div class='text-center'>
-                            <form action='' METHOD='POST' class='load-more_form'>
-                                <input type='text' name = 'load-more' style='display:none;'>
-                                <button type='submit'>Tải Thêm</button>
-                            </form>
-                        </div> -->
+                  
                 </div>
             </section>
             </div>
         </div>
         <div class="overlay-wrapper">
             <div class="overlay"></div>
-            <img src="" alt="">
+           <?php  include("./components/new_record.php");?>
         </div>
     </div>
 </body>
@@ -121,10 +115,6 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
 
     const  notiCates = document.querySelectorAll('.filter__noti  form');
     const  filterLine   = document.querySelector('.filter__line');
-    // const notiDefaultItems = document.querySelectorAll('.notification-list_detail');
-    // const eventImages = document.querySelectorAll('.event_image');
-    // const overlay = document.querySelector('.overlay-wrapper');
-    // const notiContent = document.querySelector('.notification-ui_dd-content');
    for(const index in notiCates)
    {
          notiCates[index].onclick = function(){
@@ -159,7 +149,7 @@ $(document).ready(function() {
             url: "./components/get_data.php", 
             data: formData,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
             }
         });
     });

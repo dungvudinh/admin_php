@@ -349,3 +349,87 @@ a
     left:var(--sidebar_close-width);
     width:calc(100% - var(--sidebar_close-width));
 }
+/* new record */
+.record-container
+{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background-color: #fff;
+    width:80vh;
+    height:80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+}
+.record-container_title 
+{
+    margin:20px 0;
+}
+.record-content
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:70%;
+}
+.record-content .form-group
+{
+    display: flex;  
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:100%;
+    margin-bottom:10px;
+
+}
+.record-content .form-group input 
+{
+    width:100%;
+    outline: none;
+    height:35px;
+    padding:5px;
+    font-family: var(--font-family);
+}
+.record-content button 
+{
+    width:100px;
+    height:30px;
+    position: absolute;
+    left: 50%;
+    transform:translateX(-50%);
+    bottom:40px;
+}
+.record-content .form-group  textarea 
+{
+    font-family: var(--font-family);
+    width:100%;
+}
+.record-content .form-group label 
+{
+    font-size: 1.1rem;
+}
+.record-content .form-group .form-group_child
+{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+.record-content .form-group   p 
+{
+    font-size: 1.1rem;
+}
+.record-content .form-group .form-group_child .form-group_child__2 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:100%;
+}
+.record-content .form-group .form-group_child div:first-child
+{
+    margin-right: 15px;
+}
