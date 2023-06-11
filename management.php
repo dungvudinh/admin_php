@@ -36,7 +36,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
              <div class ="container__search">
                  <form class= "filter__form">
                      <div class="filter__item filter__by_permission">
-                         <p class ="title">Lọc theo chức vụ</p>
+                         <p class ="title">Chức vụ</p>
                          <select name="permission" id="" >
                              <option value="0" <?php echo $_GET['permission'] ==0 ? "selected" :""; ?> >Tất cả</option>
                              <!-- <option value="1" <?php echo $_GET['permission'] ==1 ? "selected" :""; ?> >Admin</option> -->
@@ -46,7 +46,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                          </select>
                      </div>
                      <div class="filter__item filter__by_ban">
-                         <p class ="title">Lọc theo ban</p>
+                         <p class ="title">Ban</p>
                          <select name="ban" id="">
                              <option value="0" <?php echo $_GET['ban'] ==0 ? "selected" :""; ?>>Tất cả</option>
                              <option value="1" <?php echo $_GET['ban'] ==1 ? "selected" :""; ?>>Ban sự kiện</option>
@@ -55,7 +55,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                          </select>
                      </div>
                      <div class="filter__item filter__by_status">
-                     <p class ="title">Lọc theo trạng thái</p>
+                     <p class ="title">Trạng thái</p>
                          <select name="status" id="">
                                  <option value="0" <?php echo $_GET['status'] ==0 ? "selected" :""; ?>>Tất cả</option>
                                  <option value="1" <?php echo $_GET['status'] ==1 ?  "selected" :""; ?>>Đang hoạt động</option>
@@ -64,7 +64,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                      </div>
                      <button type="submit" class= "filter__btn">
                          <i class='bx bx-filter-alt'></i>
-                         <span>Filter</span>
+                         <span>Lọc</span>
                      </button>
                  </form>
                  <div class="searching__user">

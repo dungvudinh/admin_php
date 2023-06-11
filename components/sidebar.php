@@ -56,13 +56,13 @@ if(isset($_SESSION['isCloseSidebar']))
                 </a>
             </li>
             <li class= 'nav_link'>
-                <a href ='../management.php'>
+                <a href ='../repair.php'>
                 <i class='bx bx-wrench'></i>
                     <span class="nav_text text">Sửa chữa</span>
                 </a>
             </li>
             <li class= 'nav_link'>
-                <a href ='../management.php'>
+                <a href ='../budget.php'>
                 <i class='bx bxs-bank'></i>
                     <span class="nav_text text">Ngân sách</span>
                 </a>

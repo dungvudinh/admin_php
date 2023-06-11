@@ -44,12 +44,14 @@
 }
 .brief__infor 
 {
-    width:300px;
+    width:40%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     border-right:1px solid var(--border-color);
+    font-size: 1.0rem;
+    font-weight: 500;
 }
 .brief__infor_image 
 {
@@ -68,15 +70,17 @@
 .form__edit_user
 {
     flex:1;
-    padding:40px 30px 0 30px;
+    padding:40px 3% 0 3%;
     display: flex;
     flex-direction: column;
     align-items: center;
     height:100%;
+    font-size: 1.0rem;
 }
 .form__title 
 {
     font-weight: 500;
+    margin-bottom:10%;
 }
 .form__content
 {
@@ -96,16 +100,16 @@
     display: flex; 
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom:15px;
+    margin-bottom:2%;
     width:100%;
 }
 .form__group div  
 {
-    width:45%;
+    width:48%;
 }
 .form__group label 
 {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
 }
 .form__group div input 
 {
@@ -134,6 +138,7 @@
     background-color: var(--primary-color);
     color:#fff;
     font-family: var(--font-family);
+    margin-top:5%;
 }
 .overlay.active 
 {
@@ -218,38 +223,52 @@ header
 
 .searching__user 
 {
-    width:400px;
+    width:20%;
     height:27px;
     border:1px solid var(--border-color); 
     display: flex;
     border-radius: 7px;
     align-items: center;
     padding-left:10px;
+    align-items: center;
+    justify-content: center;
 }
 .searching__user .icon_search 
 {
     color:var(--text-color);
     font-size: 1.1rem;
 }
-.searching__user input 
+.searching__user form 
 {
-    width:100%;
-    outline:none;
-    border:none;
+    flex:1;
+    height:100%;
+   
     margin-right:5px;
     margin-left: 5px;
+   
+    
+}
+.searching__user form input 
+{
+    height:100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline:none;
+    border:none;
     color:var(--text-color);
     font-family: var(--font-family);
-    
 }
 .searching__user input:focus{ outline: none; }
 .filter__form
 {
     display: flex;
-    margin-right:30px;
+    margin-right:2%;
     align-items: center;
     justify-content: space-around;
     flex:1;
+
 }
 
 .filter__form .filter__item 
@@ -268,6 +287,7 @@ header
 .filter__item select 
 {
     flex:1;
+    font-family: var(--font-family);
 }
 .filter__btn 
 {
@@ -334,7 +354,7 @@ header
 }
 .field__name
 {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color:var(--text-color);
     /* max-width:200px; */
     text-align: left;
@@ -356,10 +376,10 @@ header
     display: flex;
     justify-content: space-around;
     font-size: 1rem;
-
     border-radius: 10px;
     background-color: var(--primary-color-light);
     margin-top:5px;
+    font-size: 0.9rem;
 }
 .user__item.disable 
 {

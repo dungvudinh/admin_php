@@ -2,7 +2,7 @@
     <h3 class='record-container_title'>
         Thông báo mới
     </h3>
-    <form class="record-content"  enctype="multipart/form-data"  method="POST">
+    <form class="record-content" enctype="multipart/form-data" method="POST">
         <div class="form-group">
             <label for="title">Tiêu đề</label>
             <input type="text" placeholder="Nhập tiêu  đề..." name="title">
@@ -27,34 +27,13 @@
         </div>
         <div class="form-group">
             <label for="file">Thêm hình ảnh</label>
-            <input type="file" name="file" value=""/>
+            <input type="file" name="file" value="" accept="image/png, image/gif, image/jpeg"/>
         </div>
         <div id="uploadStatus"></div>
         <button type="submit" name="upload">Tạo</button>
     </form>
 </div>
-<?php
-$message = "";
-    if(isset($_POST['upload']))
-    {
-        $title= $_POST['title'];
-        $content =$_POST['content'];
-        $start_time = $_POST['start_time'];
-        $end_time = $_POST['end_time'];
-        $filename = $_FILES["choosefile"]["name"];
-        $tempname = $_FILES["choosefile"]["tmp_name"];  
-        $folder = "./avatar_users/".$filename;   
-        // echo $filename;
-        // echo $tempname;
-        // $sql = "INSERT INTO image VALUES('".$filename."')";
-        // mysqli_query($connection, $sql);    
-        // if(move_uploaded_file($tempname, $folder))
-        //     $message ="Image uploaded successfully";
-        // else 
-        // $message = "Failed to upload image";
-        // echo "<script> alert('".$message."')</script>";
-    }
-?>
+
 <script>
   $(document).ready(function() {
   $('.record-content').on('submit', function(e) {
@@ -68,10 +47,11 @@ $message = "";
       processData: false,
       contentType: false,
       beforeSend: function() {
-        $('#uploadStatus').html('Uploading file...'); // Display a loading message
+       
       },
       success: function(response) {
-        $('#uploadStatus').html(response); // Display the response from the server
+        document.querySelectorAll('.record-content input').forEach(item=>item.value=null)
+        document.querySelector('.record-content textarea').value =  null;
       }
     });
   });

@@ -12,8 +12,10 @@ Array.from(document.querySelectorAll('.notification-list_detail')).forEach(item=
      {
         img = document.createElement('img');
         img.setAttribute('src', item.src);
+        img. classList.add('detail-img');
          document.querySelector('.overlay-wrapper').appendChild(img);
          document.querySelector('.overlay-wrapper').style.display = "block";
+         document.querySelector('.overlay-wrapper .record-container').style.display='none';
      }
     })
     document.querySelector('.overlay').onclick =function()
@@ -45,6 +47,8 @@ Array.from(document.querySelectorAll('.notification-list_detail')).forEach(item=
             document.querySelector('.new-record').onclick =  ()=>
             {
                 document.querySelector('.overlay-wrapper').style.display = "block";
+                document.querySelector('.overlay-wrapper .record-container').style.display = "flex";
+                document.querySelector('.overlay-wrapper img').remove();
             }
         }
        

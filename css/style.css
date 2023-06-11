@@ -17,7 +17,7 @@
     --trans-03: all 0.3 ease; 
     --trans-04: all 0.4 ease; 
     --trans-05: all 0.5 ease; 
-    --sidebar_open-width: 250px;
+    --sidebar_open-width: 17%;
     --sidebar_close-width: 78px;
     --font-family: 'Poppins', sans-serif;
     --border-color: #b1afaf;
@@ -57,7 +57,7 @@ a
     left:0;
     background:var(--sidebar-color);
     padding: 10px 14px;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     transition: all 0.3s ease;
 }
 .sidebar.close 
@@ -363,17 +363,23 @@ a
     flex-direction: column;
     justify-content:flex-start;
     align-items: center;
+    
 }
 .record-container_title 
 {
-    margin:20px 0;
+    margin: 10px 0;
 }
 .record-content
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width:70%;
+    justify-content: flex-start;
+    width:100%;
+    padding:0 50px;
+}
+.record-content  div:nth-child(2)
+{
+    height:30%;
 }
 .record-content .form-group
 {
@@ -381,7 +387,7 @@ a
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width:100%;
+
     margin-bottom:10px;
 
 }
@@ -400,36 +406,43 @@ a
     position: absolute;
     left: 50%;
     transform:translateX(-50%);
-    bottom:40px;
+    bottom:4%;
 }
 .record-content .form-group  textarea 
 {
     font-family: var(--font-family);
     width:100%;
+    height:100%;
+    resize: none;
+
 }
 .record-content .form-group label 
 {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
 }
 .record-content .form-group .form-group_child
 {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width:100%;
 }
 .record-content .form-group   p 
 {
-    font-size: 1.1rem;
+    font-size: 1.0rem;
 }
 .record-content .form-group .form-group_child .form-group_child__2 
 {
-    display: flex;
+     /* display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    width:100%;
+
+    height:20%; */
+    text-align:left;
+ 
+    width:45%;
 }
-.record-content .form-group .form-group_child div:first-child
+.record-content .form-group .form-group_child .form-group_child__2 input 
 {
-    margin-right: 15px;
 }
+

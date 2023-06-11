@@ -37,10 +37,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                             <button type="submit" value="Submit">Đơn Ứng Tuyển Mới</button>
                         </form>
 
-                        <form  class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input"  value="naf" style="display:none;" >
-                            <button type="submit" value="Submit">Đơn Sửa Chữa Mới</button>
-                        </form>
+                   
 
                         <form  class ='noti_item'  method="POST">
                             <input type="text" name="noti_input"  value="created" style="display:none;" >
