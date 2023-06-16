@@ -11,8 +11,11 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../css/notification.css">
+   <link rel="stylesheet" href="../css/budget.css">
    
 </head>
 <body>
@@ -23,39 +26,67 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
         <div class='content__wrapper'>
             <div class='content'>
                 <header>
-                    <h2 class= "title__name">Ngân Sách</h2>
-                    <i class='bx bxs-wallet'></i>
+                    <div class='header-left'>
+                        <h2 class= "title__name">Ngân Sách<i class='bx bxs-wallet'></i></h2>
+                        <?php
+                        $sql = "SELECT * FROM budget"; 
+                        $data =  $connection->query($sql);
+                        $row = mysqli_fetch_row($data);
+                        $formatted_amount = number_format($row[0], 0, ',', ',');
+                        echo "<p>Tổng ngân sách: ".$formatted_amount."đ</p>"
+                        ?>
+                    </div>
+                   <div class='header-right'>
+                        <img src="../assets/images/ck.jpg" alt="" class="ck">
+                   </div>
                 </header>
-                <p>Tổng Ngân Sách: 5.000.000 đ</p>
+               
                 <section class="section-50">
-                    <!-- <ul class ='filter__noti'>
+                    <ul class ='filter__noti'>
                         <form  class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input" value="event" style="display:none;">
-                            <button type="submit" value="Submit">Sự Kiện Mới</button>
+                            <input type="text" name="noti_input" value="new-payment" style="display:none;">
+                            <button type="submit" value="Submit">Chi Tiêu Mới</button>
                         </form>
                         <form class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input"  value="afc" style="display:none;" >
-                            <button type="submit" value="Submit">Đơn Ứng Tuyển Mới</button>
+                            <input type="text" name="noti_input"  value="list-pay" style="display:none;" >
+                            <button type="submit" value="Submit">Danh sách đóng tiền</button>
                         </form>
+                        <?php
+                           if(isset($_SESSION['user_id']))
+                           {
+                               
+                               $user_id = $_SESSION['user_id'];
+                               $sql2 ="SELECT MaCV FROM users INNER  JOIN  ban ON users.MaBan  = ban.MaBan WHERE account_id  = '".$user_id."'";
+                               $data = $connection->query($sql2);
+                               $user= mysqli_fetch_row($data); 
+                               if($user[0] == 3)
+                               {
+                                  echo 
+                                  "
+                                      <form  class ='noti_item'  method='POST'>
+                                      <input type='text' name='noti_input'  value='payment' style='display:none;' >
+                                      <button type='submit' value='Submit'>Tạo Phiếu Mới</button>
+                                  </form>
+                                  ";
+                               }
+                        }
+                        ?>
+                       
 
-                        <form  class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input"  value="naf" style="display:none;" >
-                            <button type="submit" value="Submit">Đơn Sửa Chữa Mới</button>
-                        </form>
-
-                        <form  class ='noti_item'  method="POST">
+                        <!-- <form  class ='noti_item'  method="POST">
                             <input type="text" name="noti_input"  value="created" style="display:none;" >
                             <button type="submit" value="Submit" >Đơn Đã Tạo</button>
-                        </form>
+                        </form> -->
                     </ul>
-                    <div class ='filter__line'></div> -->
-                <div class="container" >
+                    <div class ='filter__line'></div>
+                <div class="content-container">
                     <div class='notification-ui_dd-content'>
                         <?php
-                              $sql = "SELECT * FROM repair_form";
+                              $sql = "SELECT * FROM expenditure";
                               $currentDate = date('Y-m-d');   
                               $rsult = $connection->query($sql);
-                            //   echo "<input name='category' value = 'repair_form' style='display:none;'/>";
+                          
+                           
                           while($data= $data = mysqli_fetch_all($rsult, MYSQLI_ASSOC))
                           {
                               for($i =0; $i<count($data); $i++)
@@ -72,14 +103,22 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                                      
                                       <div class='notification-list_detail'>
                                           <div class='title'>
-                                              <i class='bx bx-wrench'></i>
-                                              <p><b>".$data[$i]['full_name']."</b></p>
+                                              <p><b>".$data[$i]['title']."</b></p>
                                           </div>
                                           <div class='more-infor'>
-                                              <p>SDT: ".$data[$i]['sdt']."</p>
-                                              <p>Tình trạng:  ".$data[$i]['tinh_trang']."</p>
+                                              <p>";
+                                              $string = $data[$i]['content'];
+
+                                              $lines = explode(".", $string);
+                                              for($j =0; $j< count($lines) -1; $j++)
+                                              {
+                                                echo "- ".trim($lines[$j])."<br>";
+                                              }
+                                             
+                                              echo"</p>
+                                              <p style='font-weight:500'>Tổng chi tiêu: ".number_format($data[$i]['payment'], 0, ',', ',')."đ<p>
                                           </div>
-                                          <p class='text-muted'>Mô tả: ".$data[$i]['mo_ta']."</p>
+                                         
                                       </div>
                                   </div>
                                   <div class='notification-list_creation-time'>
@@ -89,20 +128,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                                       else if($days <=365) echo $month." tháng trước";
                                       else echo $years." năm trước";
                                       echo  "</small></p>   
-                                      <form class='form-repair_status' METHOD='POST'>
-                                          <input name ='form-repair_id' value='".$data[$i]['id']."'style='display: none;'/>
-                                          <select name='repair-status' onchange ='submitForm()'>
-                                              <option value = '1'";
-                                              if($data[$i]['repair_status'] ==1) echo 'selected';
-                                              echo ">Chưa tiếp nhận</option>
-                                              <option value = '2'";
-                                              if($data[$i]['repair_status'] ==2) echo 'selected';
-                                              echo ">Đang sửa chữa</option>
-                                              <option value = '3'";
-                                              if($data[$i]['repair_status'] ==3) echo 'selected';
-                                              echo ">Hoàn thành</option>
-                                          </select>
-                                      </form> 
+                                   
                                   </div>
                                   
                               </div>

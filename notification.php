@@ -23,26 +23,51 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
         <div class='content__wrapper'>
             <div class='content'>
                 <header>
-                    <h2 class= "title__name">Thông Báo</h2>
-                    <i class='bx bxs-bell-ring'></i>
+                    <h2 class= "title__name">Thông Báo  <i class='bx bxs-bell-ring'></i></h2>
                 </header>
                 <section class="section-50">
                     <ul class ='filter__noti'>
-                        <form  class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input" value="event" style="display:none;">
-                            <button type="submit" value="Submit">Sự Kiện Mới</button>
-                        </form>
-                        <form class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input"  value="afc" style="display:none;" >
-                            <button type="submit" value="Submit">Đơn Ứng Tuyển Mới</button>
-                        </form>
-
-                   
-
-                        <form  class ='noti_item'  method="POST">
-                            <input type="text" name="noti_input"  value="created" style="display:none;" >
-                            <button type="submit" value="Submit" >Đơn Đã Tạo</button>
-                        </form>
+                        <?php
+                            if(isset($_SESSION['user_id']))
+                            {
+                                $user_id = $_SESSION['user_id'];
+                                $sql2 ="SELECT avatar, full_name, TenBan, MaCV   FROM users INNER  JOIN  ban ON users.MaBan  = ban.MaBan WHERE account_id  = '".$user_id."'";
+                                $data = $connection->query($sql2);
+                                $user= mysqli_fetch_row($data);
+                                if($user[3] ==1)
+                                {
+                                    echo 
+                                    "
+                                    <form  class ='noti_item'  method='POST'>
+                                    <input type='text' name='noti_input' value='event' style='display:none;'>
+                                    <button type='submit' value='Submit'>Sự Kiện Mới</button>
+                                </form>
+                                <form class ='noti_item'  method='POST'>
+                                    <input type='text' name='noti_input'  value='afc' style='display:none;' >
+                                    <button type='submit' value='Submit'>Đơn Ứng Tuyển Mới</button>
+                                </form>
+        
+                           
+        
+                                <form  class ='noti_item'  method='POST'>
+                                    <input type='text' name='noti_input'  value='created' style='display:none;' >
+                                    <button type='submit' value='Submit' >Đơn Đã Tạo</button>
+                                </form>
+                                    ";
+                                }
+                                else 
+                                {
+                                    echo 
+                                    "
+                                    <form  class ='noti_item'  method='POST'>
+                                    <input type='text' name='noti_input' value='event' style='display:none;'>
+                                    <button type='submit' value='Submit'>Sự Kiện Mới</button>
+                                    </form>
+                                    ";
+                                }
+                            } 
+                        ?>
+                      
                     </ul>
                     <div class ='filter__line'></div>
                 <div class="container" >

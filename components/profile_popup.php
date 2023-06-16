@@ -3,6 +3,7 @@
     include("../configuration/connection.php");
     if(isset($_POST['user_id']))
     {
+        echo $userId;
         $userId = $_POST['user_id'];
         $sql = "SELECT * FROM users WHERE account_id = ".$userId."";
         $rsult = $connection->query($sql);

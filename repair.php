@@ -23,8 +23,8 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
         <div class='content__wrapper'>
             <div class='content'>
                 <header>
-                    <h2 class= "title__name">Đơn Sửa Chữa</h2>
-                    <i class='bx bxs-wrench'></i>
+                    <h2 class= "title__name">Đơn Sửa Chữa   <i class='bx bxs-wrench'></i></h2>
+                 
                 </header>
                 <section class="section-50">
                     <!-- <ul class ='filter__noti'>
@@ -90,7 +90,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                                       echo  "</small></p>   
                                       <form class='form-repair_status' METHOD='POST'>
                                           <input name ='form-repair_id' value='".$data[$i]['id']."'style='display: none;'/>
-                                          <select name='repair-status' onchange ='submitForm()'>
+                                          <select name='repair-status' onchange ='createExpenditure()'>
                                               <option value = '1'";
                                               if($data[$i]['repair_status'] ==1) echo 'selected';
                                               echo ">Chưa tiếp nhận</option>
@@ -165,5 +165,25 @@ $(document).ready(function() {
         });
     });
 })
+
+function createExpenditure() {
+    var formData = $('.form-repair_status').serialize(); // Serialize the form data
+
+    $.ajax({
+      type: 'POST', // Use the appropriate HTTP method (POST/GET)
+      url: './components/get_data.php', // Use the form's action URL
+      data: formData,
+      success: function(response) {
+        // Handle the response from the server
+        console.log(response); // For testing/debugging
+        // You can update the page or perform any other actions here
+      },
+      error: function(xhr, status, error) {
+        // Handle errors here
+        console.log(error); // For testing/debugging
+      }
+    });
+  }
+
 </script>
 </html>

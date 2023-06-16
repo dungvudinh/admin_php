@@ -3,12 +3,12 @@
 {
     
 }
-header  
+/* header  
 {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
+} */
 header  .title__name 
 {
     margin-right:10px;
@@ -104,6 +104,10 @@ section
 
 .notification-ui_dd-content {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .notification-ui_dd-content .notification-filter
 {
@@ -124,6 +128,7 @@ section
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    width:100%;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -133,14 +138,13 @@ section
     cursor: pointer;
     transition: all 0.5s ease;
     -moz-user-select: none !important;
--webkit-touch-callout: none!important;
--webkit-user-select: none!important;
--khtml-user-select: none!important;
--moz-user-select: none!important;
--ms-user-select: none!important;
-user-select: none!important;
-    /* -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); */
-    /* box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); */
+    -webkit-touch-callout: none!important;
+    -webkit-user-select: none!important;
+    -khtml-user-select: none!important;
+    -moz-user-select: none!important;
+    -ms-user-select: none!important;
+    user-select: none!important;
+   
 }
 
 .notification-list--unread {

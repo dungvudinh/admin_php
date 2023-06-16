@@ -1,0 +1,163 @@
+@import "../../css/style.css";
+.notification-ui_dd-content
+{
+   
+}
+header 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-left 
+{
+    
+}
+.header-right 
+{
+
+}
+.header-right img 
+{
+    width:150px;
+    height:150px;
+    object-fit: contain;
+}
+.payment-form
+{
+    width:70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+     -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding:20px 0;
+    border-radius: 10px;
+}
+.payment-form input  
+{
+    font-family: var(--font-family);
+    height: 30px;
+    margin-left: 5px;
+    padding:5px;
+}
+.payment-form_title
+
+{
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+.payment-form_container
+{
+    width:70%;
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.payment-form_container .form-group:first-child
+{
+    margin-bottom: 30px;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.payment-form_container .form-group:first-child input  
+{
+    width:80%;
+    height:35px;
+    outline: none;
+}
+/* .payment-form_container .form-group:first-child::after
+{
+    position: absolute;
+    content:"";
+    height:1px;
+    width:50%;
+    background-color: var(--border-color);
+    bottom:-60%;
+    left:50%;
+    transform:translateX(-50%);
+} */
+.expenditure-form
+{
+    width:100%;
+}
+.form-group_item
+{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.form-group_child  
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-right:5px;
+}
+
+
+
+.new-input
+{
+    
+    padding:10px;
+    border:none;
+    background-color: var(--primary-color-light);
+    margin-bottom: 20px;
+    font-family: var(--font-family);
+    font-weight: 500;
+   
+}
+#submit
+{
+    padding:10px;
+    width: 100px;
+    border:none;
+    background-color: var(--primary-color-light);
+    margin-top:15px;
+    font-family: var(--font-family);
+    font-weight: 500;   
+}
+#calc 
+{
+    height:30px;
+    width: 100px;
+    border:none;
+    background-color: var(--primary-color-light);
+    margin-top:15px;
+    font-family: var(--font-family);
+    font-weight: 500;   
+}
+.notification-list_detail .title
+{
+   font-size: 1.1rem;
+}
+
+.list-pay 
+{
+    width:80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+dl, ol, ul
+{
+    padding:0;
+    margin:0;
+}
+.check-input
+{
+    width:15px;
+    height:15px;
+    margin-left:19%;
+}

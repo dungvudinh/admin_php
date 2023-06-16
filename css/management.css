@@ -365,7 +365,7 @@ header
 }
 .field__name:first-child
 {
-    min-width: 300px;
+    min-width: 20%;
 }
 .list__user
 {
@@ -396,7 +396,7 @@ header
 .user__infor 
 {
     display: flex;   
-    min-width:300px; 
+    min-width:20%; 
     align-items: center; 
     
 }
@@ -457,6 +457,28 @@ header
     align-items: center;
 }
 .user__email p
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.user__address
+{
+    display: flex;
+    align-items: center;
+}
+.user__address p
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.user__sdt
+{
+    display: flex;
+    align-items: center;
+}
+.user__sdt p
 {
     white-space: nowrap;
     overflow: hidden;

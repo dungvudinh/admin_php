@@ -61,7 +61,7 @@ include("./configuration/connection.php");
         setcookie("phone_number", $phoneNumber, time() + (86400 * 30));
         setcookie("pass", $password,  time() + (86400 * 30));
        }
-        header('Location:./index.php');
+        header('Location:./notification.php');
     }
   }
 ?>

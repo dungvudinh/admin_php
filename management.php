@@ -15,7 +15,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
     <link rel="stylesheet" href="../../css/management.css">
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="layout">
      <?php include("./components/sidebar.php")?>
      <div class="content__wrapper">
@@ -77,7 +77,14 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
              <div class ="containter__content">
                  <ul class= "list__field_user">
                     <?php
-                    $list_user = array("Thông tin cá nhân", "Ban","Ngày Vào",  'Trạng Thái', "Email", "Hành Động");
+                     $user_id = $_SESSION['user_id'];
+                     $sql2 ="SELECT avatar, full_name, TenBan, MaCV   FROM users INNER  JOIN  ban ON users.MaBan  = ban.MaBan WHERE account_id  = '".$user_id."'";
+                     $data = $connection->query($sql2);
+                     $user= mysqli_fetch_row($data);
+                     if($user[3] == 1)
+                        $list_user = array("Thông tin cá nhân", "Ban","Ngày Vào",  'Trạng Thái', "Email","Địa Chỉ","SĐT",  "Hành Động");
+                    else 
+                    $list_user = array("Thông tin cá nhân", "Ban","Ngày Vào",  'Trạng Thái', "Email", "Địa Chỉ", "SĐT");
                     for($i =0; $i<  count($list_user); $i++)
                     {
                          echo " <li class ='field__name'>
@@ -91,7 +98,7 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                          $permission_url = $_GET['permission'];
                          $ban_url = $_GET['ban'];
                          $status_url = $_GET['status'];
-                         $sql = "SELECT account_id,avatar, full_name, TenCV, TenBan, date_of_joining, status,email FROM users  INNER JOIN ban  ON  users.MaBan = ban.MaBan INNER  JOIN chuc_vu ON   users.maCV = chuc_vu.MaCV";
+                         $sql = "SELECT account_id,avatar, full_name, TenCV, TenBan, date_of_joining, status,email, address, phone_number FROM users  INNER JOIN ban  ON  users.MaBan = ban.MaBan INNER  JOIN chuc_vu ON   users.maCV = chuc_vu.MaCV";
                          if($permission_url == "0" && $ban_url == "0" && $status_url =="0") 
                          {
                              if(isset($_POST['search']))
@@ -168,12 +175,24 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                                          <div class ='user__email'>
                                              <p>".$matrix_array[$i]['email']."</p>
                                          </div>
-                                         <div class ='user__action'>
-                                             <form id='edit_form'>
-                                                 <input  type = 'text' name= 'user_id' value ='".$matrix_array[$i]['account_id']."'/>
-                                                 <button type='button'  value='Submit' id='submit'>Sửa</button>
-                                             </form>
+                                         <div class ='user__address'>
+                                             <p>".$matrix_array[$i]['address']."</p>
                                          </div>
+                                         <div class ='user__sdt'>
+                                            <p>".$matrix_array[$i]['phone_number']."</p>
+                                        </div>
+                                         ";
+                                         $user_id = $_SESSION['user_id'];
+                                         $sql2 ="SELECT avatar, full_name, TenBan, MaCV   FROM users INNER  JOIN  ban ON users.MaBan  = ban.MaBan WHERE account_id  = '".$user_id."'";
+                                         $data = $connection->query($sql2);
+                                         $user= mysqli_fetch_row($data);
+                                         if($user[3] ==1)
+                                            echo "<div class ='user__action'>
+                                                <form id='edit_form' method ='POST'>
+                                                    <input  type = 'text' name= 'user_id' value ='".$matrix_array[$i]['account_id']."'/>
+                                                    <button type='button'  value='Submit' id='submit'>Sửa</button>
+                                                </form>
+                                            </div>
                                      </li>";
                                  }
                             }
@@ -183,44 +202,35 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                  <div id="postData"></div>
              </div>
          </div>
-         <div class="page__navigation">
-             <ul class="pagination">
-                 <li class="page-item">
-                     <a class="page-link" href="#" aria-label="Previous">
-                         <span aria-hidden="true">&laquo;</span>
-                     </a>
-                 </li>
-                 <li class="page-item"><a class="page-link" href="#">1</a></li>
-                 <li class="page-item"><a class="page-link" href="#">2</a></li>
-                 <li class="page-item"><a class="page-link" href="#">3</a></li>
-                 <li class="page-item">
-                 <a class="page-link" href="#" aria-label="Next">
-                     <span aria-hidden="true">&raquo;</span>
-                 </a>
-                 </li>
-             </ul>
-         </div>
+        
      </div>
      </div>
      <div class="overlay"></div>
  </div>
 <script type="text/javascript">
- $('#submit').click(function()    
-    {
-        $.ajax({
-            type:"POST",
-            url:"./components/profile_popup.php",
-            data:$('#edit_form').serialize(),
-            success:function(response)
-            {
-                $('.overlay').html(response)
-            },
-            error:function()
-            {
-                alert("Error");
-            }
-        })
-    })
+  
+      
+        // $('#submit').click(function()    
+        //     {
+        //         console.log(document.querySelector('input[name="user_id"]'));
+        //         $.ajax({
+        //             type:"POST",
+        //             url:"./components/profile_popup.php",
+        //             data:$('#edit_form').serialize(),
+        //             success:function(response)
+        //             {
+        //                 $('.overlay').html(response)
+        //             },
+        //             error:function()
+        //             {
+        //                 alert("Error");
+        //             }
+        //         })
+        //     })
+
+ 
+   
+
 </script>
 <?php 
     if(isset($_POST['edit_user']))
@@ -240,18 +250,37 @@ const categoryItems =document.querySelectorAll('.categories li');
 const categoriesLine = document.querySelector('.container .categories__line');
 const buttonNewUser = document.querySelector('header .action .new__btn');
 const overlay = document.querySelector('.layout .overlay');
-const editBtn = document.querySelector('.user__action #submit');
-
+const editBtns = document.querySelectorAll('.user__action #submit');
+console.log(editBtns);
 Array.from(categoryItems).forEach((item, index)=>
     item.onclick =function(){
         Array.from(categoryItems).forEach(itemNode=> itemNode.classList.remove('active'));
         item.classList.add('active');
         categoriesLine.style.transform = `translateX(${index * 100}px)`;
     });
-    editBtn.onclick = function(){
-        overlay.classList.add('active');
+    editBtns.forEach(btn=>{
+        btn.onclick = function()
+        {
+            $.ajax({
+                type:"POST",
+                url:"./components/profile_popup.php",
+                data:$('#edit_form').serialize(),
+                success:function(response)
+                {
+                    $('.overlay').html(response)
+                },
+                error:function()
+                {
+                    alert("Error");
+                }
+            })
+            //  overlay.classList.add('active');
+        }
+      
     }
- 
+    )
+   
+   
 </script>
 </body>
 </html>

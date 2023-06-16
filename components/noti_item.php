@@ -1,7 +1,7 @@
 <body>
 <?php
     include("../configuration/connection.php");
-
+    session_start();
     date_default_timezone_set("Asia/Ho_Chi_Minh");
     if(isset($_POST['noti_input']))
     {
@@ -239,6 +239,158 @@
             }
         }
         }
+        else if($noti_input== 'payment')
+        {
+            echo "
+                <div class='payment-form'>
+                    <h3 class='payment-form_title'>Phiếu Chi tiêu</h3>
+                    <form class='payment-form_container' method='POST'>
+                        <div class='form-group'>
+                            <label for='content'>Nội dung</label>
+                            <input name='payment-form_content'/>
+                        </div>
+                        <div class='form-group expenditure-form'>
+                            <div class='form-group_item'>
+                                
+                                <div class='form-group_child'>
+                                    <label for='content'>Khoản chi</label>
+                                    <input name='expenditure'/>
+                                </div>
+
+                                <div class='form-group_child'>
+                                    <label for='price'>Thành Tiền</label>
+                                    <input name='price' id='price'  type='number'/>
+                                </div>
+
+                            </div>
+                            <div class='form-group_item'>
+                                <div class='form-group_child'>
+                                    <label for='content'>Khoản chi</label>
+                                    <input name='expenditure'/>
+                                </div>
+                                <div class='form-group_child'>
+                                    <label for='price'>Thành Tiền</label>
+                                    <input name='price'  type='number' id='price'/>
+                                </div>
+                            </div>
+                        </div>
+                        <button type='button'  class='new-input'><i class='bx bx-plus'></i>Thêm mới</button>
+                        <div class='form-group'>
+                            <label for='sum'>Tổng tiền</label>
+                            <input name='sum'  id='sum'/>
+                            <button type='button' id='calc'>Tính</button>
+                        </div>
+                        <button type='submit' id='submit' name='create-expediture' value='submit'>Tạo</button>
+                    </form>
+                   
+                </div>
+            ";
+        }
+        else if($noti_input == 'new-payment')
+        {
+            $sql = "SELECT * FROM expenditure";
+            $currentDate = date('Y-m-d');   
+            $rsult = $connection->query($sql);
+        
+         
+        while($data= $data = mysqli_fetch_all($rsult, MYSQLI_ASSOC))
+        {
+            for($i =0; $i<count($data); $i++)
+            {
+                $difference = strtotime($currentDate) - strtotime(date("Y-m-d", strtotime($data[$i]['create_at'])));
+                $days = abs($difference/(60*60)/24);
+                $month =  floor($days/30);
+                $years = floor($month/12);
+                echo "
+                <div class='notification-list";
+                if($data[$i]['unread']  ==1) echo " notification-list--unread";
+                    echo "'>
+                <div class='notification-list_content'>
+                   
+                    <div class='notification-list_detail'>
+                        <div class='title'>
+                            <p><b>".$data[$i]['title']."</b></p>
+                        </div>
+                        <div class='more-infor'>
+                            <p>";
+                            $string = $data[$i]['content'];
+
+                            $lines = explode(".", $string);
+                            for($j =0; $j< count($lines) -1; $j++)
+                            {
+                              echo "- ".trim($lines[$j])."<br>";
+                            }
+                           
+                            echo"</p>
+                            <p style='font-weight:500'>Tổng chi tiêu: ".number_format($data[$i]['payment'], 0, ',', ',')."đ<p>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class='notification-list_creation-time'>
+                    <p class='creation-time'><small>";
+                    if($days ==0) echo "Hôm nay";
+                    else if($days <=30) echo $days." ngày trước";
+                    else if($days <=365) echo $month." tháng trước";
+                    else echo $years." năm trước";
+                    echo  "</small></p>   
+                 
+                </div>
+                
+            </div>
+        ";
+            }
+        }
+        }
+        else if($noti_input == 'list-pay')
+        {
+            echo "
+                <div class='list-pay'>
+                    <h3 class='list-pay_title'>Danh sách đóng tiền</h3>
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                            <th scope='col'>#</th>
+                            <th scope='col'>Họ Tên</th>
+                            <th scope='col'>Số Điện Thoại</th>
+                            <th scope='col'>Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+                        $sql ="SELECT account_id, full_name,phone_number, isPay FROM users ORDER BY full_name ASC";
+                        $data = $connection->query($sql);
+                        while($matrix = mysqli_fetch_all($data, MYSQLI_ASSOC))
+                        {
+                            for($i=0; $i< count($matrix); $i++)
+                            {
+                                echo  
+                                "
+                                    <tr>
+                                    <th scope='row'>1</th>
+                                    <td>".$matrix[$i]['full_name']."</td>
+                                    <td>".$matrix[$i]['phone_number']."</td>
+                                    <td>
+                                        <form class='pay-submit' method='POST'>
+                                            <input type='checkbox' ";
+                                            if($matrix[$i]['isPay'] ==1) echo 'checked';
+                                            echo " class='check-input' value='".$matrix[$i]['account_id']."'";
+                                                $user_id = $_SESSION['user_id'];
+                                                $sql2 ="SELECT MaCV FROM users INNER  JOIN  ban ON users.MaBan  = ban.MaBan WHERE account_id  = '".$user_id."'";
+                                                $data = $connection->query($sql2);
+                                                $user= mysqli_fetch_row($data); 
+                                                if($user[0] !=3) echo "disabled";
+                                            echo "/>
+                                        </form>
+                                    </td>
+                                    </tr>
+                                ";
+                            }
+                        }
+                        echo "</tbody>
+                        </table>
+                </div>
+            ";
+        }
     }
 ?>
 <script src='./logic/notiItemShow.js'></script>
@@ -252,6 +404,7 @@
         e.preventDefault(); 
         var form = $(this);
         var formData = form.serialize(); 
+        console.log(formData);
         $.ajax({
             type: form.attr('method'),
             url: "./components/get_data.php", 
@@ -261,8 +414,87 @@
             }
         });
     });
+   
+    $('.payment-form_container').submit(function(e) {
+        e.preventDefault(); 
+        var formData = {};
+
+        const  title =document.querySelector('input[name="payment-form_content"]');
+        const payment = document.querySelector('input[name="sum"]');
+        formData[title.name] = title.value;
+        formData[payment.name] = payment.value;
+        $("input[name='price']").each(function(index) {
+          formData['price[' + index + ']'] = $(this).val();
+        });
+        $("input[name='expenditure']").each(function(index) {
+          formData['expenditure[' + index + ']'] = $(this).val();
+        });
+        $.ajax({
+            url: "./components/get_data.php", 
+            method:"POST",
+            data: formData,
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    });
+    $('.check-input').change(function(e){
+        if ($(this).is(':checked')) {
+            // Checkbox is checked
+            var formData={};
+                formData['isPay']  = 1;
+                formData['account_id'] = e.target.value;
+                console.log(formData);
+                $.ajax({
+                url: "./components/get_data.php", 
+                method:"POST",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                }})
+            console.log('Checkbox is checked!');
+        } else {
+            var formData={};
+                formData['isPay']  = 0;
+                formData['account_id'] = e.target.value;
+                console.log(formData);
+                $.ajax({
+                url: "./components/get_data.php", 
+                method:"POST",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                }})
+            // Checkbox is not checked
+            console.log('Checkbox is not checked!');
+        }
+    })
+   
 })
-function submitForm() {
+var prices = document.querySelectorAll('#price');
+$(document).ready(function() {
+  var counter = 0;
+
+  $('.new-input').click(function() {
+    var newForm = ' <div class="form-group_item"><div class="form-group_child"><label for="content">Khoản chi</label><input name="expenditure"/></div><div class="form-group_child"><label for="price">Thành Tiền</label><input name="price" id="price"/></div></div>';
+    $('.expenditure-form').append(newForm);
+    prices = document.querySelectorAll('#price');
+    console.log(prices);
+    counter++;
+  });
+});
+var sum  = 0;
+$('#calc').click(function(e)
+{
+    sum =0;
+    document.querySelectorAll('#price').forEach(item=>{
+        sum+= parseInt(item.value);
+    })
+    document.querySelector('#sum').value = sum;
+})
+   
+
+  function createExpenditure() {
     var formData = $('.form-repair_status').serialize(); // Serialize the form data
 
     $.ajax({
@@ -283,3 +515,5 @@ function submitForm() {
 
 </script>
 </body>
+
+                             

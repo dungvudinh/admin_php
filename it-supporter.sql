@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2023 at 03:51 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Jun 16, 2023 at 03:43 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +31,7 @@ CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
   `account_name` char(10) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accounts`
@@ -51,13 +52,13 @@ CREATE TABLE `app_form_client` (
   `MaKhoa` int(11) NOT NULL,
   `MaBan` int(11) NOT NULL,
   `note` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `create_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
   `unread` tinyint(1) NOT NULL,
   `sdt` char(10) NOT NULL,
   `email` varchar(200) NOT NULL,
   `isReceived` tinyint(1) NOT NULL,
   `isAccept` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `app_form_client`
@@ -81,9 +82,9 @@ CREATE TABLE `app_form_server` (
   `content` varchar(1000) NOT NULL,
   `end_time` datetime NOT NULL,
   `image_url` varchar(500) NOT NULL,
-  `create_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
   `start_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `app_form_server`
@@ -102,7 +103,7 @@ INSERT INTO `app_form_server` (`id`, `title`, `content`, `end_time`, `image_url`
 CREATE TABLE `ban` (
   `MaBan` int(11) NOT NULL,
   `TenBan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ban`
@@ -116,13 +117,30 @@ INSERT INTO `ban` (`MaBan`, `TenBan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `budget`
+--
+
+CREATE TABLE `budget` (
+  `buudget_left` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `budget`
+--
+
+INSERT INTO `budget` (`buudget_left`) VALUES
+(4950000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `chuc_vu`
 --
 
 CREATE TABLE `chuc_vu` (
   `MaCV` int(11) NOT NULL,
   `TenCV` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chuc_vu`
@@ -137,12 +155,35 @@ INSERT INTO `chuc_vu` (`MaCV`, `TenCV`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expenditure`
+--
+
+CREATE TABLE `expenditure` (
+  `id` int(11) NOT NULL,
+  `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment` double NOT NULL,
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `unread` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expenditure`
+--
+
+INSERT INTO `expenditure` (`id`, `content`, `payment`, `title`, `create_at`, `unread`) VALUES
+(1, 'mua hoa :300,000đ.mua băng keo:30,000đ.', 330000, 'chi tiêu ngày 14/06/2023', '2023-06-14 10:18:06', 1),
+(2, 'mua thiệp:250,000đ.mua pháo:520,000đ.', 770000, 'Sự  kiện chào đón tân sinh viên K17 (23/06/2022)', '2023-06-14 14:19:01', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `image`
 --
 
 CREATE TABLE `image` (
   `image_url` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
@@ -195,7 +236,7 @@ INSERT INTO `image` (`image_url`) VALUES
 CREATE TABLE `khoa` (
   `MaKhoa` int(11) NOT NULL,
   `TenKhoa` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `khoa`
@@ -218,17 +259,17 @@ CREATE TABLE `repair_form` (
   `sdt` char(10) NOT NULL,
   `tinh_trang` varchar(200) NOT NULL,
   `mo_ta` varchar(500) NOT NULL,
-  `create_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
   `unread` tinyint(1) NOT NULL,
   `repair_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `repair_form`
 --
 
 INSERT INTO `repair_form` (`id`, `full_name`, `sdt`, `tinh_trang`, `mo_ta`, `create_at`, `unread`, `repair_status`) VALUES
-(1, 'Nguyễn Thị Dung ', '0869370492', 'lap không lên nguồn', 'Mình đang dùng bình thường thì máy bị tắt nguồn. Mình đã cố gắng thử cắm sạc nhưng bất thành', '2023-06-06 07:00:00', 1, 2);
+(1, 'Nguyễn Thị Dung ', '0869370492', 'lap không lên nguồn', 'Mình đang dùng bình thường thì máy bị tắt nguồn. Mình đã cố gắng thử cắm sạc nhưng bất thành', '2023-06-06 07:00:00', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -241,9 +282,9 @@ CREATE TABLE `su_kien` (
   `title` varchar(200) NOT NULL,
   `image_url` varchar(500) NOT NULL,
   `content` varchar(500) NOT NULL,
-  `create_at` datetime NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp(),
   `unread` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `su_kien`
@@ -260,25 +301,30 @@ INSERT INTO `su_kien` (`id`, `title`, `image_url`, `content`, `create_at`, `unre
 
 CREATE TABLE `users` (
   `account_id` int(11) NOT NULL,
-  `avatar` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `full_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(500) NOT NULL,
+  `full_name` varchar(30) NOT NULL,
   `gender` bit(1) NOT NULL,
   `MaCV` int(1) NOT NULL COMMENT '1(Admin), 2(Member),3(Thủ quỹ), 4(CTV)))',
   `status` bit(1) NOT NULL,
-  `email` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(200) NOT NULL,
   `date_of_joining` date NOT NULL,
   `MaBan` int(1) NOT NULL COMMENT 'ban 1(sự kiện), ban 2(truyền thông), ban 3(kĩ thuật))',
-  `address` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(200) NOT NULL,
   `MaKhoa` int(11) NOT NULL COMMENT '1(CNTT), 2(KTPM), 3(KHMT))',
-  `phone_number` char(10) COLLATE utf8mb4_unicode_ci NOT NULL
+  `phone_number` char(10) NOT NULL,
+  `isPay` tinyint(1) NOT NULL,
+  `age` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`account_id`, `avatar`, `full_name`, `gender`, `MaCV`, `status`, `email`, `date_of_joining`, `MaBan`, `address`, `MaKhoa`, `phone_number`) VALUES
-(6, '999-Anh-Gai-Xinh-Viet-Nam-Hot-Girl-Cute-De (1).jpg', 'Vũ Đình Dũng', b'0', 1, b'1', 'anhkho881@gmail.com', '2021-03-27', 1, 'Hải Dương', 1, '0869370492');
+INSERT INTO `users` (`account_id`, `avatar`, `full_name`, `gender`, `MaCV`, `status`, `email`, `date_of_joining`, `MaBan`, `address`, `MaKhoa`, `phone_number`, `isPay`, `age`) VALUES
+(6, '20230615170656.jpg', 'Vũ Đình Dũng ', b'0', 1, b'1', 'anhkho881@gmail.com', '2021-03-27', 3, 'Hải Dương', 2, '0869370492', 1, 21),
+(7, '20230615222035.jpg', 'Hoàng Thị Thương', b'0', 2, b'1', 'hoangthuong@gmail.com', '2020-06-03', 1, 'Hải Phòng ', 3, '0869370952', 1, 21),
+(8, '20230615222154.jpg', 'Nguyễn Thị Huyền', b'0', 2, b'1', 'huyennguyen@gmail.com', '2021-06-20', 3, 'Bắc Giang', 1, '0869374974', 0, 20),
+(9, '20230615222307.jpg', 'Đoàn Thảo Trang', b'0', 3, b'1', 'trangdoan@gmail.com', '2022-06-05', 3, 'Thái Bình', 2, '0869374865', 1, 22);
 
 --
 -- Indexes for dumped tables
@@ -315,6 +361,12 @@ ALTER TABLE `chuc_vu`
   ADD PRIMARY KEY (`MaCV`);
 
 --
+-- Indexes for table `expenditure`
+--
+ALTER TABLE `expenditure`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `khoa`
 --
 ALTER TABLE `khoa`
@@ -349,46 +401,62 @@ ALTER TABLE `users`
 --
 ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `app_form_client`
 --
 ALTER TABLE `app_form_client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `app_form_server`
 --
 ALTER TABLE `app_form_server`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ban`
 --
 ALTER TABLE `ban`
   MODIFY `MaBan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `chuc_vu`
 --
 ALTER TABLE `chuc_vu`
   MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `expenditure`
+--
+ALTER TABLE `expenditure`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `khoa`
 --
 ALTER TABLE `khoa`
   MODIFY `MaKhoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `repair_form`
 --
 ALTER TABLE `repair_form`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `su_kien`
 --
 ALTER TABLE `su_kien`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
