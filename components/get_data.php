@@ -117,9 +117,7 @@ if(isset($_FILES['image-input']))
       $sql = "UPDATE users SET full_name = '".$fullname."', email = '".$email."', address= '".$address."' , phone_number = '".$sdt."', age = ".$age." , MaKhoa = ".$khoa." ".$fileImage." WHERE account_id = ".$_SESSION['user_id']."" ;
       echo $sql;
 }
-if(isset($_POST['form-repair_id']))
-{
-    echo $_POST['form-repair_id'];
-}
+
+
 $connection->query($sql);
 ?>  

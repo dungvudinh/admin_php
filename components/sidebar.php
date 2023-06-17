@@ -195,9 +195,12 @@ if(isset($_SESSION['isCloseSidebar']))
     $('.header_infor').click(function(e){
        
         profile.style.transform = 'translateX(0)';
+        profile.style.opacity = '1';
     })
     $('.back-btn').click(function(e){
         profile.style.transform = 'translateX(-300px)';
+        profile.style.opacity = '0';
+        document.querySelector('#name-input').style.display='none';
     })
     $('.header-profile_edit').click(function(e){
         document.querySelector('#name-input').style.display='block';
@@ -227,20 +230,6 @@ if(isset($_SESSION['isCloseSidebar']))
         var form = $(this);
         var formData = new FormData(this); 
         console.log(formData);
-        // const nameInput= document.querySelector('#name-input');
-        // const emailInput= document.querySelector('#email-input');
-        // const addressInput= document.querySelector('#address-input');
-        // const sdtInput= document.querySelector('#sdt-input');
-        // const age= document.querySelector('#age-input');
-        // const khoaSelect= document.querySelector('#khoa-select');
-        // const inputFile =document.querySelector('input[type="file"]');
-        // formData[nameInput.name] = nameInput.value;
-        // formData[emailInput.name] = emailInput.value;
-        // formData[addressInput.name] =addressInput.value;
-        // formData[sdtInput.name] = sdtInput.value;
-        // formData[age.name] = age.value;
-        // formData[khoaSelect.name] =khoaSelect.value;
-        // if(inputFile.files[0] !=null) formData['file-path'] = inputFile.files[0].name;
         $.ajax({
             type: form.attr('method'),
             url: "./components/get_data.php", 

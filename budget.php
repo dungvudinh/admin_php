@@ -32,8 +32,11 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                         $sql = "SELECT * FROM budget"; 
                         $data =  $connection->query($sql);
                         $row = mysqli_fetch_row($data);
+                      
                         $formatted_amount = number_format($row[0], 0, ',', ',');
-                        echo "<p>Tổng ngân sách: ".$formatted_amount."đ</p>"
+                        echo "<p>Tổng ngân sách: ".$formatted_amount."đ</p>";
+                        if($row[0] <= 0)
+                            $connection->query("UPDATE users SET isPay =0 ");
                         ?>
                     </div>
                    <div class='header-right'>
@@ -184,7 +187,7 @@ $(document).ready(function() {
         var formData = form.serialize(); 
         $.ajax({
             type: form.attr('method'),
-            url: "./components/get_data.php", 
+            url: "get_data.php", 
             data: formData,
             success: function(response) {
                 // console.log(response);

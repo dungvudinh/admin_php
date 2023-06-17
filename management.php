@@ -69,8 +69,8 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                  </form>
                  <div class="searching__user">
                      <i class='bx bx-search-alt-2 icon_search'></i>
-                     <form action="" method ="POST">
-                         <input type="text" placeholder="Search user ..." name="search">
+                     <form action="" method ="POST" class='search-form'>
+                         <input type="text" placeholder="Search user ..." name="search" oninput="searchUser()">
                      </form>
                  </div>
              </div>
@@ -98,43 +98,21 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                          $permission_url = $_GET['permission'];
                          $ban_url = $_GET['ban'];
                          $status_url = $_GET['status'];
-                         $sql = "SELECT account_id,avatar, full_name, TenCV, TenBan, date_of_joining, status,email, address, phone_number FROM users  INNER JOIN ban  ON  users.MaBan = ban.MaBan INNER  JOIN chuc_vu ON   users.maCV = chuc_vu.MaCV";
+                         $sql = "SELECT account_id,avatar, full_name, TenCV, TenBan, date_of_joining, status,email, address, phone_number FROM users  INNER JOIN ban  ON  users.MaBan = ban.MaBan INNER  JOIN chuc_vu ON   users.MaCV = chuc_vu.MaCV";
                          if($permission_url == "0" && $ban_url == "0" && $status_url =="0") 
                          {
-                             if(isset($_POST['search']))
-                                 $sql .= " WHERE full_name LIKE '%".$_POST['search']."%'";
+                            //  if(isset($_POST['search']))
+                            //      $sql .= " WHERE full_name LIKE '%".$_POST['search']."%'";
                              
                          }
                          else if($permission_url != "0")
-                         {
-                            if(isset($_POST['search']))
-                                $sql .= " WHERE permission = ".(int)$permission_url." AND full_name LIKE '%".$_POST['search']."%'";
-                            else 
-                                $sql .= " WHERE permission = ".(int)$permission_url."";
-                         }
+                            $sql .= " WHERE  users.MaCV = ".(int)$permission_url."";
                          else if($ban_url != "0")
-                         {
-                                if(isset($_POST['search']))
-                                $sql .= " WHERE ban = ".(int)$ban_url."  AND full_name LIKE '%".$_POST['search']."%'";
-                                else 
-                                $sql .= " WHERE  ban = ".(int)$ban_url."";
-                         }
+                            $sql .= " WHERE  users.MaBan = ".(int)$ban_url."";
                          else if($status_url !='0')
-                         {
-                            if(isset($_POST['search']))
-                            $sql .= " WHERE status = ".(int)$status_url." AND full_name LIKE '%".$_POST['search']."%'";
-                            else 
                             $sql .= "users WHERE status = ".(int)$status_url."";
-                         }
-                            
                          else 
-                         {
-                            if(isset($_POST['search']))
-                            $sql .= " WHERE permission = ".(int)$permission_url." AND ban = ".(int)$ban_url." AND status = ".(int)$status_url." AND full_name LIKE '%".$_POST['search']."%'";
-                            else 
-                            $sql .= " WHERE permission = ".(int)$permission_url." AND ban = ".(int)$ban_url." AND status = ".(int)$status_url."";
-                            
-                         }
+                            $sql .= " WHERE users.MaCV = ".(int)$permission_url." AND users.MaBan = ".(int)$ban_url." AND status = ".(int)$status_url."";
                          $result = $connection->query($sql);
                          if(mysqli_num_rows($result) > 0)
                          {
@@ -188,10 +166,10 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
                                          $user= mysqli_fetch_row($data);
                                          if($user[3] ==1)
                                             echo "<div class ='user__action'>
-                                                <form id='edit_form' method ='POST'>
-                                                    <input  type = 'text' name= 'user_id' value ='".$matrix_array[$i]['account_id']."'/>
-                                                    <button type='button'  value='Submit' id='submit'>Sửa</button>
-                                                </form>
+                                                <form class='my-form'>
+                                                <input type='text' value='".$matrix_array[$i]['account_id']."' name='user_id'>
+                                                <button type='submit' id= 'submit'>Sửa</button>
+                                            </form>
                                             </div>
                                      </li>";
                                  }
@@ -207,79 +185,73 @@ if(!isset($_COOKIE['phone_number']))  header("Location:./login.php");
      </div>
      <div class="overlay"></div>
  </div>
+
+
 <script type="text/javascript">
   
-      
-        // $('#submit').click(function()    
-        //     {
-        //         console.log(document.querySelector('input[name="user_id"]'));
-        //         $.ajax({
-        //             type:"POST",
-        //             url:"./components/profile_popup.php",
-        //             data:$('#edit_form').serialize(),
-        //             success:function(response)
-        //             {
-        //                 $('.overlay').html(response)
-        //             },
-        //             error:function()
-        //             {
-        //                 alert("Error");
-        //             }
-        //         })
-        //     })
-
- 
-   
-
+  $(document).ready(function() {
+    $('.my-form').submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: './components/profile_popup.php',
+        data: $(this).serialize(),
+        success: function(response) {
+          $('.overlay').html(response);
+        }
+      });
+    });
+  });
 </script>
-<?php 
-    if(isset($_POST['edit_user']))
-    {
-       $status_option = $_POST['status_option'];
-       $ban_option = $_POST['ban_option'];
-       $permission_option =  $_POST['permission_option'];
-       $user_id = $_POST['user_id'];
-       $sql =  "UPDATE users SET permission  = ". $permission_option.",  status=".$status_option.", ban = ".$ban_option." WHERE  account_id = ".$user_id."";
-       mysqli_query($connection, $sql);
-    }
-?>
+
 
 <script>
+    
 const categories = document.querySelector('.categories');
 const categoryItems =document.querySelectorAll('.categories li');
 const categoriesLine = document.querySelector('.container .categories__line');
 const buttonNewUser = document.querySelector('header .action .new__btn');
 const overlay = document.querySelector('.layout .overlay');
 const editBtns = document.querySelectorAll('.user__action #submit');
-console.log(editBtns);
 Array.from(categoryItems).forEach((item, index)=>
     item.onclick =function(){
         Array.from(categoryItems).forEach(itemNode=> itemNode.classList.remove('active'));
         item.classList.add('active');
         categoriesLine.style.transform = `translateX(${index * 100}px)`;
     });
+
+    function exitFunc()
+    {
+        overlay.classList.remove('active');
+    }
     editBtns.forEach(btn=>{
         btn.onclick = function()
         {
-            $.ajax({
-                type:"POST",
-                url:"./components/profile_popup.php",
-                data:$('#edit_form').serialize(),
-                success:function(response)
-                {
-                    $('.overlay').html(response)
-                },
-                error:function()
-                {
-                    alert("Error");
-                }
-            })
-            //  overlay.classList.add('active');
+             overlay.classList.add('active');
         }
       
     }
     )
-   
+    const timeoutID= [];
+   function searchUser()
+   {
+        if(timeoutID.length > 0)
+        {
+            clearTimeout(timeoutID[timeoutID.length -1]);
+            timeoutID.pop();
+        }
+         timeoutID.push( setTimeout(function(){
+            var formData = $('.search-form').serialize();
+            $.ajax({
+                method: 'POST',
+                url: './components/noti_item.php',
+                data: formData,
+                success: function(response) {
+                $('.list__user').html(response);
+                }
+            });
+        }, 1000))
+   }
    
 </script>
 </body>

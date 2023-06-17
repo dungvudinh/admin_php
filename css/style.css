@@ -17,7 +17,7 @@
     --trans-03: all 0.3 ease; 
     --trans-04: all 0.4 ease; 
     --trans-05: all 0.5 ease; 
-    --sidebar_open-width: 17%;
+    --sidebar_open-width: 20%;
     --sidebar_close-width: 78px;
     --font-family: 'Poppins', sans-serif;
     --border-color: #b1afaf;
@@ -26,7 +26,7 @@ body
 {
 
     font-size: 62.5%;
-    height:100vh; 
+    /* height:100vh;  */
     background-color: var(--primary-color-light);
     padding:0; 
     margin:0;
@@ -46,12 +46,16 @@ a
     /* padding:15px; */
  
 }
+.content__wrapper
+{
+    z-index: -1;
+}
 .profile 
 {
-    width:100%;
-    height:500px;
+    width:20%;
+    height:450px;
     background-color: var(--primary-color-light);
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     transition: all 0.3s ease;
     left:0;
@@ -62,6 +66,7 @@ a
     padding:10px;
     flex-direction: column;
     align-items: center;
+   opacity: 0;
 }
 .back-btn 
 {
@@ -207,10 +212,17 @@ input[name='name-input']
     transform:rotate(-180deg);
     transition: var(--trans-03);
 }
+.sidebar.close .header_infor__image
+{
+    width:40px;
+    height:40px;
+}
 .sidebar.close .header_text 
 {
+    opacity: 0;
     display: none;
 }
+
 
 .sidebar.close .text 
 {
@@ -297,6 +309,7 @@ input[name='name-input']
 {
     display: flex;
     align-items: center;
+    justify-content: center;
     width:100%;
     background-color: transparent;
     border:none;
@@ -305,8 +318,8 @@ input[name='name-input']
 .header_infor__image 
 {
     margin:5px 10px 5px 5px;
-    height:50px;
-    width:50px;
+    height:60px;
+    width:60px;
     border-radius: 100%;
     overflow: hidden;
 }
@@ -314,7 +327,7 @@ input[name='name-input']
 {
     width:100%;
     height:100%;
-    object-fit: fill;
+    object-fit:fill;
 }
 .header_text 
 {
@@ -322,10 +335,18 @@ input[name='name-input']
     flex-direction: column;
     font-family: var(--font-family);
     font-size: 1rem;
+    justify-content:center;
+    align-items: flex-start;
+    flex:1;
+}
+.header_text span 
+{
+    white-space: nowrap;
 }
 .header_text__name 
 {
     font-weight: 600;
+    font-size: 0.9rem;
 }
 .sidebar .nav_link
 {
@@ -383,6 +404,10 @@ input[name='name-input']
 {
     font-size: 1.4rem;
     margin-right:5px;
+}
+.nav_link span 
+{
+    white-space: nowrap;
 }
 .bottom_content 
 {

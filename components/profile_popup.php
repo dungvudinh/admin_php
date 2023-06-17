@@ -1,9 +1,9 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class= "overlay__layout"></div>
 <?php
     include("../configuration/connection.php");
     if(isset($_POST['user_id']))
     {
-        echo $userId;
         $userId = $_POST['user_id'];
         $sql = "SELECT * FROM users WHERE account_id = ".$userId."";
         $rsult = $connection->query($sql);
@@ -11,7 +11,7 @@
        
        echo "
     <div class ='overlay__content'>
-        <button class='exit_btn'>X</button>
+        <button class='exit_btn' onclick='exitFunc();'>X</button>
         <div class='brief__infor'>
             <div class= 'brief__infor_image'>
                 <img src='../avatar_users/".$data[1]."' alt=''>
@@ -104,34 +104,49 @@
                             <option value='2'";  
                             if($data[4] == 2) echo "selected";
                             echo ">Thành Viên</option>
-                            <option value='4'";  
-                            if($data[4] == 4) echo "selected";
+                            <option value='3'";  
+                            if($data[4] == 3) echo "selected";
                             echo  ">Thủ Quỹ</option>
-                            <option value='5'"; 
-                            if($data[4] == 5) echo "selected";
+                            <option value='4'"; 
+                            if($data[4] == 4) echo "selected";
                             echo">CTV</option>
                         </select>
                     </div>
                 </div>
                 <input  type='text' name='user_id'  value='".$userId."'  class='user__id_input'/>
-                <button type='submit' class='submit__btn' name='edit_user'>Save profile</button>
+                <button type='submit' class='submit__btn' onclick = 'closeWindow()'>Lưu thông tin</button>
            </form>
        </div>
    </div>
        ";
     }
  ?>
- <?php
 
-  ?>
 <script>
-    
-
-    document.querySelector('.exit_btn').onclick = function()
-    {
-        overlay.classList.remove('active');
-    }
+      
+  $(document).ready(function() {
+    // Prevent default form submission
+    $('.form__content').submit(function(event) {
+      event.preventDefault();
+     console.log($(this).serialize());
+      $.ajax({
+        method:"POST",
+        url: '../process.php',
+        data: $(this).serialize(),
+        success: function(response) {
+          // Handle the response if needed
+         console.log(response);
+        }
+      });
+    });
+  });
+  function closeWindow()
+  {
+    alert("Cập nhập thành công");
+    exitFunc();
+  }
 </script>
+
 
 
 
